@@ -16,7 +16,7 @@ logger = logging.getLogger()
 
 # API 호출 설정
 API_URL = "https://business.juso.go.kr/addrlink/addrLinkApi.do"
-CONFIRM_KEY = "U01TX0FVVEgyMDI0MTIwODEzMDQxMzExNTMwNzg="  # API 승인키
+CONFIRM_KEY = "API_KEY"  # API 승인키
 
 # 사용자 입력: folder_path 및 file_number
 folder_path = input("Enter folder path (default: 202203): ").strip() or "202203"
