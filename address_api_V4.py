@@ -26,7 +26,7 @@ file_path = f"./{folder_path}/{file_number}/{file_number}.csv"  # 입력된 파�
 output_folder = f"./{folder_path}/{file_number}"  # 동일한 폴더에 결과 저장
 
 # API 호출 병렬 수 제한 설정
-semaphore = asyncio.Semaphore(10)  # 동시 최대 50개의 API 요청
+semaphore = asyncio.Semaphore(2)  # 동시 최대 50개의 API 요청
 
 
 # API 호출 함수
@@ -42,7 +42,7 @@ async def call_juso_api(session, address, retries=3, delay=3):
     for attempt in range(retries):
         try:
             async with semaphore:  # 병렬 요청 수 제한 적용
-                async with session.get(API_URL, params=params, timeout=50) as response:
+                async with session.get(API_URL, params=params, timeout=600) as response:
                     if response.status == 200:
                         data = await response.json()
                         if (
