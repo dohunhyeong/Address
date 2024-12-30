@@ -107,7 +107,8 @@ def process_addresses(df):
 # 메인 함수
 def main():
     # 데이터 읽기
-    df = pd.read_csv(file_path, index_col=0, encoding="utf-8-sig")
+    # index_col=0 으로 설정을 해두니 final_address.csv, error_address.csv에 연번이 들어가서 이 부분 수정정
+    df = pd.read_csv(file_path, encoding="utf-8-sig")
     logger.info(f"Loaded data file: {file_path}")
 
     # 데이터 처리
@@ -117,7 +118,8 @@ def main():
     final_result_path = os.path.join(output_folder, f"final_address_{file_number}.csv")
     error_result_path = os.path.join(output_folder, f"error_address_{file_number}.csv")
 
-    pd.DataFrame(results).to_csv(final_result_path, index=False)
+    df_final = pd.DataFrame(results).reset_index()
+    df_final.to_csv(final_result_path, index=False)
     pd.DataFrame(error_records).to_csv(error_result_path, index=False)
 
     print(f"Processing complete for file {file_number}.")
